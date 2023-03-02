@@ -26,7 +26,18 @@ class App {
         int id = 1;
         while(true) {
             System.out.print("명령) ");
-            String operation = sc.nextLine();
+            String operation = sc.nextLine().trim();
+
+            if(operation.equals("등록")) {
+                System.out.print("명언 : ");
+                String quote = sc.nextLine().trim();
+
+                System.out.print("작가 : ");
+                String author = sc.nextLine().trim();
+
+                quotesList.add(new Quotes(id, operation, quote, author));
+                id++;
+            }
 
             if (operation.equals("목록")) {
                 System.out.println("번호 / 작가 / 명언\n" +
@@ -41,15 +52,6 @@ class App {
                 sc.close();
                 break;
             }
-
-            System.out.print("명언 : ");
-            String quote = sc.nextLine();
-
-            System.out.print("작가 : ");
-            String author = sc.nextLine();
-
-            quotesList.add(new Quotes(id, operation, quote, author));
-            id++;
 
         }
     }
