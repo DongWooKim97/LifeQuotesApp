@@ -5,13 +5,17 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
+        System.out.println("== 명언 앱 ==");
 
         int id = 1;
         while(true) {
-            System.out.println("== 명언 앱 ==");
             System.out.print("명령) ");
             String operation = sc.nextLine();
+
+            if(operation.equals("종료")) {
+                sc.close();
+                break;
+            }
 
             System.out.print("명언 : ");
             String quote = sc.nextLine();
@@ -21,13 +25,10 @@ public class Main {
 
             Quotes q = new Quotes(id, operation, quote, author);
             id++;
-
-            break;
         }
 
-        sc.close();
+
         
-        System.out.println("명령) 종료");
 
     }
 }
