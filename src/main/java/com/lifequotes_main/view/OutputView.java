@@ -9,4 +9,8 @@ public class OutputView {
         System.out.println("== 명령 앱 종료 ==");
     }
 
+    public void printRegisterSuccess(int id) {
+        System.out.println(id + "번 명언이 등록되었습니다.");
+    }
+
 }
