@@ -1,4 +1,4 @@
-package com.lifequotes;
+package com.lifequotes_practice;
 
 import java.util.ArrayList;
 import java.util.List;
