@@ -23,8 +23,6 @@ class App {
 
         List<Quotes> quotesList = new ArrayList<>();
 
-//        Map<Integer, Quotes> quotesMap = new HashMap<>();
-
         int id = 1;
         while (true) {
             System.out.print("명령) ");
@@ -39,7 +37,6 @@ class App {
 
                 Quotes q = new Quotes(id, operation, quote, author);
                 quotesList.add(q);
-//                quotesMap.put(id, q);
 
                 System.out.printf("%d번 명언이 등록되었습니다.\n", id);
                 id++;
@@ -56,45 +53,62 @@ class App {
                 sc.close();
                 break;
             } else if (operation.contains("삭제?id=")) {
-                int removeId = Integer.parseInt(String.valueOf(operation.charAt(operation.length() - 1)));
+                int removeId = Character.getNumericValue(operation.charAt(operation.length() - 1));
 
-                try {
+                if (quotesList.get(removeId - 1).getId() == removeId) {
                     quotesList.remove(removeId - 1);
                     System.out.printf("%d번 명언이 삭제되었습니다.\n", removeId);
-                } catch (Exception e) {
-                    System.out.printf("%d번 명언이 존재하지 않습니다.\n", removeId);
-//                }
-
-
+                } else {
+                    System.out.printf("%d번 명언은 존재하지 않습니다.\n", removeId);
                 }
+            } else if (operation.contains("수정?id=")) {
+                int editId = Character.getNumericValue(operation.charAt(operation.length() - 1));
 
+                System.out.println("명언(기존) : " + quotesList.get(editId - 1).getQuote());
+                System.out.print("명언 : ");
+                String editQuote = sc.nextLine().trim();
+                quotesList.get(editId - 1).setQuote(editQuote);
+
+                System.out.println("작가(기존) : " + quotesList.get(editId - 1).getAuthor());
+                System.out.print("작가 : ");
+                String editAuthor = sc.nextLine().trim();
+                quotesList.get(editId - 1).setAuthor(editAuthor);
             }
+
         }
     }
+}
 
-    class Quotes {
-        private int id;
-        private String operation;
-        private String quote;
-        private String author;
+class Quotes {
+    private int id;
+    private String operation;
+    private String quote;
+    private String author;
 
-        public Quotes(int id, String operation, String quote, String author) {
-            this.id = id;
-            this.operation = operation;
-            this.quote = quote;
-            this.author = author;
-        }
+    public Quotes(int id, String operation, String quote, String author) {
+        this.id = id;
+        this.operation = operation;
+        this.quote = quote;
+        this.author = author;
+    }
 
-        public int getId() {
-            return id;
-        }
+    public int getId() {
+        return id;
+    }
 
-        public String getQuote() {
-            return quote;
-        }
+    public String getQuote() {
+        return quote;
+    }
 
-        public String getAuthor() {
-            return author;
-        }
+    public void setQuote(String quote) {
+        this.quote = quote;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
