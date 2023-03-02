@@ -54,7 +54,15 @@ public class QuotesController {
     }
 
     public void modify(int id) {
+        Quotes q = list.get(id - 1);
 
+        outputView.printBeforeQuote(q);
+        String modifiedQuote = inputView.readQuote();
+
+        outputView.printBeforeAuthor(q);
+        String modifiedAuthor = inputView.readQuote();
+        list.get(id - 1).setQuote(modifiedQuote);
+        list.get(id - 1).setAuthor(modifiedAuthor);
     }
 
     public void remove(int id) {
@@ -63,9 +71,8 @@ public class QuotesController {
             list.remove(removeId);
             outputView.printSuccessRemove(id);
         } catch (Error e) {
-            throw new Error("삭제안됨");
+            outputView.printFailRemove(id);
         }
-
     }
 
     public void register(int id) {
@@ -73,7 +80,6 @@ public class QuotesController {
         String author = inputView.readAuthor();
 
         Quotes q = new Quotes(id, quote, author);
-
         list.add(q);
         outputView.printRegisterSuccess(id);
     }
@@ -83,8 +89,6 @@ public class QuotesController {
             Quotes q = list.get(i);
             System.out.printf("%d / %s / %s\n", q.getId(), q.getQuote(), q.getAuthor());
         }
-
     }
-
 
 }
