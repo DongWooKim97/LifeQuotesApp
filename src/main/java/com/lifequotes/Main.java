@@ -4,6 +4,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        new App().init();
+    }
+}
+
+class App {
+
+    public void init() {
         Scanner sc = new Scanner(System.in);
         System.out.println("== 명언 앱 ==");
 
@@ -26,10 +33,6 @@ public class Main {
             Quotes q = new Quotes(id, operation, quote, author);
             id++;
         }
-
-
-        
-
     }
 }
 
