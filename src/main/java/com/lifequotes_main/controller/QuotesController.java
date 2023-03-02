@@ -34,8 +34,38 @@ public class QuotesController {
             } else if (command.equals("목록")) {
                 outputView.printShowListComment();
                 showList();
+            } else if (command.contains("?id=")) {
+                String[] splitStr = command.split("\\?id=");
+                String tmpCommand = splitStr[0];
+                int tmpId = Integer.parseInt(splitStr[1]);
+
+                if (isDelete(tmpCommand)) {
+                    remove(tmpId);
+                } else {
+                    modify(tmpId);
+                }
             }
         }
+    }
+
+
+    public boolean isDelete(String command) {
+        return command.equals("삭제");
+    }
+
+    public void modify(int id) {
+
+    }
+
+    public void remove(int id) {
+        int removeId = id - 1;
+        try {
+            list.remove(removeId);
+            outputView.printSuccessRemove(id);
+        } catch (Error e) {
+            throw new Error("삭제안됨");
+        }
+
     }
 
     public void register(int id) {
